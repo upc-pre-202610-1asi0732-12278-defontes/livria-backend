@@ -347,7 +347,7 @@ namespace LivriaBackend.users.Application.Internal.CommandServices
 
                 if (admin != null)
                 {
-                    admin.AddCapital(40);
+                    admin.AddCapital(19.90m);
                     await _userAdminRepository.UpdateAsync(admin);
                 }
             }
