@@ -11,6 +11,7 @@ using System;
 using System.Security.Claims;
 using LivriaBackend.IAM.Interfaces.REST.Resources;
 using Microsoft.AspNetCore.Authorization;
+using LivriaBackend.shared.Domain.Exceptions;
 
 namespace LivriaBackend.IAM.Interfaces.REST.Controllers
 {
@@ -39,12 +40,23 @@ namespace LivriaBackend.IAM.Interfaces.REST.Controllers
                 request.Icon,
                 request.Phrase
             );
-            var result = await _mediator.Send(command);
-            if (result == null)
+            try
             {
-                return BadRequest(new { message = "Registration failed." });
+                await _mediator.Send(command);
+                return StatusCode(201, new { message = "Registration successful." });
             }
-            return StatusCode(201, new { message = "Registration successful." });
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (DuplicateEntityException ex)
+            {
+                return Conflict(new { message = ex.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new { message = "An unexpected error occurred while registering." });
+            }
         }
         
         [HttpPost("sign-in/admin")]

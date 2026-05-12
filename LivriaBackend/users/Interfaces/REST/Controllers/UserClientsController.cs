@@ -106,17 +106,51 @@ namespace LivriaBackend.users.Interfaces.REST.Controllers
         }
 
         /// <summary>
+        /// Comprueba si el email y/o el nombre de usuario están libres para registro (sin listar usuarios).
+        /// </summary>
+        [HttpGet("availability")]
+        [AllowAnonymous]
+        [SwaggerOperation(
+            Summary = "Comprobar disponibilidad de email/username para registro.",
+            Description = "Devuelve flags por campo consultado. Al menos uno de email o username debe enviarse."
+        )]
+        [ProducesResponseType(typeof(UserClientAvailabilityResource), 200)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<UserClientAvailabilityResource>> GetRegistrationAvailability(
+            [FromQuery] string? email,
+            [FromQuery] string? username)
+        {
+            var normalizedEmail = string.IsNullOrWhiteSpace(email) ? null : email.Trim();
+            var normalizedUsername = string.IsNullOrWhiteSpace(username) ? null : username.Trim();
+
+            if (normalizedEmail == null && normalizedUsername == null)
+            {
+                return BadRequest(new { message = "Provide at least email or username query parameter." });
+            }
+
+            var availability = await _userClientQueryService.GetRegistrationAvailabilityAsync(
+                normalizedEmail,
+                normalizedUsername);
+
+            var resource = new UserClientAvailabilityResource(
+                availability.EmailAvailable,
+                availability.UsernameAvailable);
+
+            return Ok(resource);
+        }
+
+        /// <summary>
         /// Obtiene todos los clientes de usuario del sistema.
         /// </summary>
         /// <returns>
         /// Una acción de resultado HTTP que contiene una colección de <see cref="UserClientResource"/>
         /// si la operación fue exitosa (código 200 OK).
         /// </returns>
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [SwaggerOperation(
             Summary= "Obtener los datos de todos los clientes.",
-            Description= "Te muestra los datos de los clientes."
+            Description= "Solo administradores. Lista todos los clientes (no usar desde apps públicas)."
             
         )]
         [ProducesResponseType(typeof(IEnumerable<UserClientResource>), 200)]

@@ -29,6 +29,16 @@ namespace LivriaBackend.users.Application.Internal.CommandServices
 
         public async Task<UserClient> Handle(RegisterUserClientCompositeCommand command, CancellationToken cancellationToken)
         {
+            if (await _userClientRepository.ExistsByUsernameAsync(command.Username))
+            {
+                throw new ArgumentException($"User with username '{command.Username}' already exists.");
+            }
+
+            if (await _userClientRepository.ExistsByEmailAsync(command.Email))
+            {
+                throw new ArgumentException($"User with email '{command.Email}' already exists.");
+            }
+
             var userClient = new UserClient(
                 command.Display,
                 command.Username,

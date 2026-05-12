@@ -55,5 +55,27 @@ namespace LivriaBackend.users.Application.Internal.QueryServices
             // Devuelve false si no existe O si el plan es incorrecto
             return userClient != null && userClient.Subscription == "communityplan";
         }
+
+        /// <inheritdoc />
+        public async Task<UserClientAvailability> GetRegistrationAvailabilityAsync(string? email, string? username)
+        {
+            bool? emailAvailable = null;
+            if (email != null)
+            {
+                emailAvailable = !await _userClientRepository.ExistsByEmailAsync(email);
+            }
+
+            bool? usernameAvailable = null;
+            if (username != null)
+            {
+                usernameAvailable = !await _userClientRepository.ExistsByUsernameAsync(username);
+            }
+
+            return new UserClientAvailability
+            {
+                EmailAvailable = emailAvailable,
+                UsernameAvailable = usernameAvailable
+            };
+        }
     }
 }

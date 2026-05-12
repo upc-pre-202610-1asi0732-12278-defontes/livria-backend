@@ -33,5 +33,12 @@ namespace LivriaBackend.users.Domain.Model.Services
         Task<UserClient> Handle(GetUserClientByIdQuery query);
         
         Task<bool> HasCommunityPlanAsync(int userClientId);
+
+        /// <summary>
+        /// Checks registration availability for email and/or username without exposing user data.
+        /// </summary>
+        /// <param name="email">Normalized email to check, or null to skip.</param>
+        /// <param name="username">Normalized username to check, or null to skip.</param>
+        Task<UserClientAvailability> GetRegistrationAvailabilityAsync(string? email, string? username);
     }
 }

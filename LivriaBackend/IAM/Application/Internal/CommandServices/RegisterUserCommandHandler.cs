@@ -29,7 +29,7 @@ namespace LivriaBackend.IAM.Application.Internal.CommandServices
             var existingIdentity = await _identityRepository.GetByUsernameAsync(command.Username);
             if (existingIdentity != null)
             {
-                throw new ApplicationException($"Username '{command.Username}' is already taken.");
+                throw new ArgumentException($"Username '{command.Username}' is already taken.");
             }
             
             var identity = new Identity(
