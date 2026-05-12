@@ -28,6 +28,12 @@ namespace LivriaBackend.users.Domain.Model.Aggregates
         /// </summary>
         public string Subscription { get; private set; }
         
+        /// <summary>
+        /// Nuevos campos para la supervisión del pago mensual del usuario con plan comunidad
+        /// </summary>
+        public DateTime? PlanChangeDate { get; private set; }
+        public bool HasPayed { get; private set; }
+        
 
         /// <summary>
         /// Obtiene la colección de comunidades a las que este usuario se ha unido.
@@ -80,7 +86,9 @@ namespace LivriaBackend.users.Domain.Model.Aggregates
         {
             Icon = icon;
             Phrase = phrase;
-            Subscription = subscription; 
+            Subscription = subscription;
+            HasPayed = false;
+            PlanChangeDate = null;
             UserCommunities = new List<UserCommunity>();
         }
 
@@ -108,11 +116,31 @@ namespace LivriaBackend.users.Domain.Model.Aggregates
         public void UpdateSubscription(string newSubscriptionPlan)
         {
             if (string.IsNullOrWhiteSpace(newSubscriptionPlan))
-            {
                 throw new ArgumentException("Subscription plan cannot be empty.", nameof(newSubscriptionPlan));
-            }
-            
+    
             Subscription = newSubscriptionPlan;
+            PlanChangeDate = DateTime.UtcNow;
+    
+            // Si vuelve a freeplan, resetea el pago
+            if (newSubscriptionPlan == "freeplan")
+                HasPayed = false;
+        }
+        public void SetHasPayed(bool hasPayed)
+        {
+            HasPayed = hasPayed;
+            if (hasPayed)
+                PlanChangeDate = DateTime.UtcNow; // reinicia el ciclo mensual
+        }
+
+        /// <summary>
+        /// Método para verificar si venció del plazo
+        /// </summary>
+        /// <returns></returns>
+        public bool IsPaymentOverdue()
+        {
+            if (Subscription != "communityplan" || !PlanChangeDate.HasValue)
+                return false;
+            return DateTime.UtcNow > PlanChangeDate.Value.AddDays(37); // 30 días del ciclo + 7 de gracia
         }
         
         /// <summary>

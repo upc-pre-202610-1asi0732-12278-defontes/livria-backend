@@ -23,7 +23,11 @@ namespace LivriaBackend.users.Interfaces.REST.Resources
         
         string Phrase,
         
-        string Subscription
+        string Subscription,
+        
+        DateTime? PlanChangeDate,
+        
+        bool HasPayed
         
     ) : UserResource(Id, Display, Username, Email); 
 }

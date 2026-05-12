@@ -19,7 +19,9 @@ namespace LivriaBackend.users.Interfaces.REST.Transform
                 entity.Email,
                 entity.Icon,
                 entity.Phrase,
-                entity.Subscription
+                entity.Subscription,
+                entity.PlanChangeDate,
+                entity.HasPayed
             );
         }
     }

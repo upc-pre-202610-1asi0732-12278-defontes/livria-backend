@@ -59,7 +59,10 @@ namespace LivriaBackend.commerce.Interfaces.REST.Controllers
             try
             {
                 var cartItem = await _cartItemCommandService.Handle(command);
-                var cartItemResource = _mapper.Map<CartItemResource>(cartItem);
+        
+                var fullCartItem = await _cartItemQueryService.Handle(new GetCartItemByIdQuery(cartItem.Id));
+        
+                var cartItemResource = _mapper.Map<CartItemResource>(fullCartItem);
                 return CreatedAtAction(nameof(GetCartItemById), new { id = cartItem.Id }, cartItemResource);
             }
             catch (ArgumentException ex)

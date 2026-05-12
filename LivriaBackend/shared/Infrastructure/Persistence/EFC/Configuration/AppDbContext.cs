@@ -215,7 +215,7 @@ namespace LivriaBackend.shared.Infrastructure.Persistence.EFC.Configuration
                     shipping.Property(s => s.City).IsRequired().HasMaxLength(100).HasColumnName("ShippingCity");
                     shipping.Property(s => s.District).IsRequired().HasMaxLength(100).HasColumnName("ShippingDistrict");
                     shipping.Property(s => s.Reference).HasMaxLength(500).HasColumnName("ShippingReference");
-
+                    shipping.Property(s => s.Price).HasColumnName("ShippingPrice");
                 });
 
 

@@ -89,5 +89,12 @@ namespace LivriaBackend.users.Domain.Model.Services
         /// El resultado de la tarea es el objeto <see cref="UserClient"/> con el plan de suscripción actualizado.
         /// </returns>
         Task<UserClient> Handle(UpdateUserClientSubscriptionCommand command);
+        
+        /// <summary>
+        /// Maneja el comando para actualizar si el cliente ha pagado
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        Task<UserClient> Handle(UpdateUserClientHasPayedCommand command);
     }
 }

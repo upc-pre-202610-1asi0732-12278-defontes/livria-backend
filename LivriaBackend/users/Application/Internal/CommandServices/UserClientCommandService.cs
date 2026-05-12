@@ -434,5 +434,23 @@ namespace LivriaBackend.users.Application.Internal.CommandServices
 
             return userClient;
         }
+        
+        /// <summary>
+        /// Maneja el comando para actualizar si el cliente ha pagado.
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public async Task<UserClient> Handle(UpdateUserClientHasPayedCommand command)
+        {
+            var userClient = await _userClientRepository.GetByIdAsync(command.UserClientId);
+            if (userClient == null)
+                throw new ArgumentException($"UserClient with ID {command.UserClientId} not found.");
+
+            userClient.SetHasPayed(command.HasPayed);
+            await _userClientRepository.UpdateAsync(userClient);
+            await _unitOfWork.CompleteAsync();
+            return userClient;
+        }
     }
 }

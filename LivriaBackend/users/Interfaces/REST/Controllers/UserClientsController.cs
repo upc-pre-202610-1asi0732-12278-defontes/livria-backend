@@ -574,5 +574,34 @@ namespace LivriaBackend.users.Interfaces.REST.Controllers
                 return StatusCode(500, new { message = "An unexpected error occurred while checking the subscription plan." });
             }
         }
+        
+        
+        [Authorize(Roles = "UserClient,Admin")]
+        [HttpPut("{id}/hasPayed")]
+        [SwaggerOperation(
+            Summary = "Actualizar el estado de pago de un cliente.",
+            Description = "Permite marcar si un usuario ha pagado su suscripción mensual."
+        )]
+        [ProducesResponseType(typeof(UserClientResource), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<UserClientResource>> UpdateHasPayed(int id, [FromBody] UpdateUserClientHasPayedResource resource)
+        {
+            var command = new UpdateUserClientHasPayedCommand(id, resource.HasPayed);
+            try
+            {
+                var userClient = await _userClientCommandService.Handle(command);
+                var userClientResource = _mapper.Map<UserClientResource>(userClient);
+                return Ok(userClientResource);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new { message = "An unexpected error occurred." });
+            }
+        }
     }
 }

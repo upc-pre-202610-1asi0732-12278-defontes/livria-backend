@@ -16,6 +16,8 @@ namespace LivriaBackend.commerce.Interfaces.REST.Resources
         string District,
         
         [StringLength(255, ErrorMessage = "MaxLengthError")]
-        string Reference
+        string Reference,
+        
+        decimal Price
     );
 }

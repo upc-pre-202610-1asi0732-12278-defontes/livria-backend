@@ -250,7 +250,11 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
-
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(5119); // Esto hace que escuche en 192.168.1.42 y localhost
+});
+builder.Services.AddHostedService<SubscriptionExpirationService>();
 var app = builder.Build();
 
 app.UseRequestLocalization(localizationOptions);

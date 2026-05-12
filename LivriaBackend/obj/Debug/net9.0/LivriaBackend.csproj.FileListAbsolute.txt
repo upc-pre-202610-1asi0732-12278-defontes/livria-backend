@@ -280,3 +280,4 @@ C:\Users\GMKtec\Desktop\upc\2026-01\livria\app\NewLivria\livria-backend\LivriaBa
 C:\Users\GMKtec\Desktop\upc\2026-01\livria\app\NewLivria\livria-backend\LivriaBackend\obj\Debug\net9.0\LivriaBackend.pdb
 C:\Users\GMKtec\Desktop\upc\2026-01\livria\app\NewLivria\livria-backend\LivriaBackend\obj\Debug\net9.0\LivriaBackend.genruntimeconfig.cache
 C:\Users\GMKtec\Desktop\upc\2026-01\livria\app\NewLivria\livria-backend\LivriaBackend\obj\Debug\net9.0\ref\LivriaBackend.dll
+C:\Users\GMKtec\Desktop\upc\2026-01\livria\app\NewLivria\livria-backend\LivriaBackend\obj\Debug\net9.0\LivriaBackend.sourcelink.json

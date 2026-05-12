@@ -171,6 +171,10 @@ namespace LivriaBackend.commerce.Domain.Model.Aggregates
                 Total += item.ItemTotal;
                 item.SetOrder(this);
             }
+            if (isDelivery && shipping != null)
+            {
+                Total += shipping.Price;
+            }
         }
 
         /// <summary>
