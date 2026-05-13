@@ -1,4 +1,4 @@
-﻿using LivriaBackend.commerce.Domain.Model.Aggregates;
+using LivriaBackend.commerce.Domain.Model.Aggregates;
 using LivriaBackend.commerce.Domain.Model.Commands;
 using LivriaBackend.commerce.Domain.Model.Entities;
 using LivriaBackend.commerce.Domain.Repositories;

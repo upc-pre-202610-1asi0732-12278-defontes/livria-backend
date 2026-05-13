@@ -1,4 +1,4 @@
-﻿using LivriaBackend.communities.Domain.Model.Queries;
+using LivriaBackend.communities.Domain.Model.Queries;
 using LivriaBackend.communities.Domain.Model.Aggregates;
 using LivriaBackend.communities.Domain.Services;
 using LivriaBackend.communities.Domain.Repositories;

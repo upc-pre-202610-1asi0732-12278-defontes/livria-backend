@@ -1,4 +1,4 @@
-﻿using LivriaBackend.commerce.Domain.Model.Entities;
+using LivriaBackend.commerce.Domain.Model.Entities;
 using LivriaBackend.commerce.Domain.Repositories;
 using LivriaBackend.shared.Infrastructure.Persistence.EFC.Configuration;
 using LivriaBackend.shared.Infrastructure.Persistence.EFC.Repositories;

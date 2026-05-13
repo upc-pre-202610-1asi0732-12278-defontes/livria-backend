@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using LivriaBackend.commerce.Domain.Model.Aggregates;
 using LivriaBackend.commerce.Domain.Model.Commands;
 using LivriaBackend.commerce.Domain.Model.Entities;

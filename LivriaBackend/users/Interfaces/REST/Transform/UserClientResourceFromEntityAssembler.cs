@@ -1,4 +1,4 @@
-﻿using LivriaBackend.users.Domain.Model.Aggregates;
+using LivriaBackend.users.Domain.Model.Aggregates;
 using LivriaBackend.users.Interfaces.REST.Resources;
 
 namespace LivriaBackend.users.Interfaces.REST.Transform

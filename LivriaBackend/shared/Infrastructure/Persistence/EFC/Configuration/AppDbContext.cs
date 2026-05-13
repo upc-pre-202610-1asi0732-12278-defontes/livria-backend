@@ -1,4 +1,4 @@
-﻿using LivriaBackend.communities.Domain.Model.Aggregates;
+using LivriaBackend.communities.Domain.Model.Aggregates;
 using LivriaBackend.communities.Domain.Model.ValueObjects; 
 using LivriaBackend.commerce.Domain.Model.Aggregates;
 using LivriaBackend.commerce.Domain.Model.Entities; 

@@ -1,4 +1,4 @@
-﻿using LivriaBackend.commerce.Domain.Model.Aggregates; 
+using LivriaBackend.commerce.Domain.Model.Aggregates; 
 using LivriaBackend.communities.Domain.Model.Aggregates;
 using System.Collections.Generic;
 using System.Linq;
