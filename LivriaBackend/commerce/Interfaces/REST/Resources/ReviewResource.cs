@@ -14,8 +14,12 @@ namespace LivriaBackend.commerce.Interfaces.REST.Resources
         string Content,
         
         [Range(0, 5, ErrorMessage = "RangeError")]
-        int Stars
-        
-        
+        int Stars,
+
+        [Range(0, int.MaxValue, ErrorMessage = "MinimumValueError")]
+        int UserClientId,
+
+        /// <summary>URL o data URI del avatar del autor (mismo formato que en perfil de usuario).</summary>
+        string? Icon
     );
 }

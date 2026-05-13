@@ -16,7 +16,8 @@ namespace LivriaBackend.users.Domain.Model.Aggregates
         /// <summary>
         /// Obtiene el URL o identificador del icono/avatar del usuario.
         /// </summary>
-        public string Icon { get; private set; }
+        /// <remarks>Puede ser nulo en datos legados o si la columna en BD admite NULL.</remarks>
+        public string? Icon { get; private set; }
 
         /// <summary>
         /// Obtiene una frase o estado personal del usuario.
@@ -81,7 +82,7 @@ namespace LivriaBackend.users.Domain.Model.Aggregates
         /// <param name="icon">El URL o identificador del icono/avatar del cliente.</param>
         /// <param name="phrase">La frase o estado personal del cliente.</param>
         /// <param name="subscription">El plan de suscripción del cliente.</param>
-        public UserClient(string display, string username, string email, string icon, string phrase, string subscription)
+        public UserClient(string display, string username, string email, string? icon, string phrase, string subscription)
             : base(display, username, email)
         {
             Icon = icon;
@@ -101,7 +102,7 @@ namespace LivriaBackend.users.Domain.Model.Aggregates
         /// <param name="email">La nueva dirección de correo electrónico.</param>
         /// <param name="icon">El nuevo URL o identificador del icono.</param>
         /// <param name="phrase">La nueva frase o estado personal.</param>
-        public void Update(string display, string email, string icon, string phrase)
+        public void Update(string display, string email, string? icon, string phrase)
         {
             base.UpdateUserProperties(display, email);
             Icon = icon;

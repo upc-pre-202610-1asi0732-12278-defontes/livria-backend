@@ -108,7 +108,7 @@ namespace LivriaBackend.communities.Application.Internal.QueryServices
             
             if (ownerClient != null)
             {
-                ownerResource = new UserSummaryResource(ownerClient.Id, ownerClient.Username, ownerClient.Icon);
+                ownerResource = new UserSummaryResource(ownerClient.Id, ownerClient.Username, ownerClient.Icon ?? string.Empty);
             } 
             else 
             {
@@ -124,7 +124,7 @@ namespace LivriaBackend.communities.Application.Internal.QueryServices
                     var userResource = new UserSummaryResource(
                         userClient.Id,
                         userClient.Username, 
-                        userClient.Icon      
+                        userClient.Icon ?? string.Empty
                     );
                     memberResources.Add(userResource);
                 }

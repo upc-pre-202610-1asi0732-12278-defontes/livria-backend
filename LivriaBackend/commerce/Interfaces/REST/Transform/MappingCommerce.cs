@@ -23,10 +23,15 @@ namespace LivriaBackend.commerce.Interfaces.REST.Transform
             // <summary>Crea un mapeo del agregado <see cref="Book"/> a <see cref="BookResource"/>.</summary>
             CreateMap<Book, BookResource>();
 
-            // <summary>Crea un mapeo de la entidad <see cref="Review"/> a <see cref="ReviewResource"/>.</summary>
-            // <remarks>Incluye un mapeo condicional para el nombre de usuario desde <see cref="Review.UserClient"/>.</remarks>
-            CreateMap<Review, ReviewResource>()
-                .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.UserClient != null ? src.UserClient.Display : "Unknown User"));
+            // Review → ReviewResource: constructor posicional; evitamos ambigüedades con ForMember + record.
+            CreateMap<Review, ReviewResource>().ConvertUsing(review => new ReviewResource(
+                review.Id,
+                review.BookId,
+                review.UserClient != null ? (review.UserClient.Display ?? review.Username) : review.Username,
+                review.Content,
+                review.Stars,
+                review.UserClientId,
+                review.UserClient != null ? review.UserClient.Icon : null));
 
             // <summary>Crea un mapeo de la entidad <see cref="CartItem"/> a <see cref="CartItemResource"/>.</summary>
             CreateMap<CartItem, CartItemResource>();

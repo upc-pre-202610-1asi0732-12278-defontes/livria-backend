@@ -72,9 +72,11 @@ namespace LivriaBackend.commerce.Application.Internal.CommandServices
             var review = new Review(command.BookId, command.UserClientId, command.Content, command.Stars, usernameForReview);
 
             await _reviewRepository.AddAsync(review);
-            await _unitOfWork.CompleteAsync(); 
+            await _unitOfWork.CompleteAsync();
 
-            return review;
+            // Recargar con UserClient para que el mapeo a ReviewResource incluya Icon.
+            var persisted = await _reviewRepository.GetByIdAsync(review.Id);
+            return persisted ?? review;
         }
         
         public async Task<Review> Handle(UpdateReviewCommand command)

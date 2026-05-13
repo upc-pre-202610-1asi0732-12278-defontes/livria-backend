@@ -89,7 +89,7 @@ namespace LivriaBackend.shared.Infrastructure.Persistence.EFC.Configuration
             modelBuilder.Entity<UserClient>(entity =>
             {
                 entity.ToTable("userclients");
-                entity.Property(uc => uc.Icon);
+                entity.Property(uc => uc.Icon).IsRequired(false);
                 entity.Property(uc => uc.Phrase);
                 entity.Property(uc => uc.Subscription);
 

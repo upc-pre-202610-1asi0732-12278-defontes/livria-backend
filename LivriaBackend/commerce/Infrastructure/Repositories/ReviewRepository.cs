@@ -24,30 +24,25 @@ namespace LivriaBackend.commerce.Infrastructure.Repositories
         }
 
         /// <summary>
-        /// Obtiene una reseña de forma asíncrona por su identificador único, incluyendo el libro y el cliente de usuario asociados.
-        /// Sobrescribe el método base para incluir la carga ansiosa de las relaciones <see cref="Review.Book"/> y <see cref="Review.UserClient"/>.
+        /// Obtiene una reseña por id con <see cref="Review.UserClient"/> cargado (p. ej. icono en API).
+        /// No incluye <see cref="Review.Book"/>: <see cref="Book"/> tiene query filter por <c>IsActive</c> y un Include
+        /// con relación requerida puede fallar al materializar si el libro está inactivo.
         /// </summary>
-        /// <param name="id">El identificador único de la reseña.</param>
-        /// <returns>Una tarea que representa la operación asíncrona. El resultado de la tarea es la <see cref="Review"/> encontrada, o null si no existe.</returns>
         public new async Task<Review> GetByIdAsync(int id)
         {
             return await this.Context.Reviews
                 .IgnoreQueryFilters()
-                .Include(r => r.Book)
                 .Include(r => r.UserClient) 
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
 
         /// <summary>
-        /// Obtiene todas las reseñas de forma asíncrona, incluyendo el libro y el cliente de usuario asociados.
-        /// Sobrescribe el método base para incluir la carga ansiosa de las relaciones <see cref="Review.Book"/> y <see cref="Review.UserClient"/>.
+        /// Obtiene todas las reseñas con <see cref="Review.UserClient"/> (sin Include de Book por query filter).
         /// </summary>
-        /// <returns>Una tarea que representa la operación asíncrona. El resultado de la tarea es una colección de todas las <see cref="Review"/>.</returns>
         public new async Task<IEnumerable<Review>> GetAllAsync()
         {
             return await this.Context.Reviews
                 .IgnoreQueryFilters()
-                .Include(r => r.Book)
                 .Include(r => r.UserClient) 
                 .ToListAsync();
         }
@@ -69,15 +64,12 @@ namespace LivriaBackend.commerce.Infrastructure.Repositories
         }
 
         /// <summary>
-        /// Obtiene todas las reseñas de un libro específico de forma asíncrona, incluyendo el libro y el cliente de usuario asociados.
+        /// Reseñas de un libro con autor (<see cref="Review.UserClient"/>) cargado; sin Include de Book (query filter).
         /// </summary>
-        /// <param name="bookId">El identificador del libro.</param>
-        /// <returns>Una tarea que representa la operación asíncrona. El resultado de la tarea es una colección de <see cref="Review"/> para el libro especificado.</returns>
         public async Task<IEnumerable<Review>> GetByBookIdAsync(int bookId)
         {
             return await this.Context.Reviews
                 .IgnoreQueryFilters()
-                .Include(r => r.Book) 
                 .Include(r => r.UserClient) 
                 .Where(r => r.BookId == bookId) 
                 .ToListAsync();
@@ -87,6 +79,7 @@ namespace LivriaBackend.commerce.Infrastructure.Repositories
         {
             return await Context.Reviews
                 .IgnoreQueryFilters()
+                .Include(r => r.UserClient)
                 .Where(r => r.UserClientId == userClientId)
                 .ToListAsync();
         }

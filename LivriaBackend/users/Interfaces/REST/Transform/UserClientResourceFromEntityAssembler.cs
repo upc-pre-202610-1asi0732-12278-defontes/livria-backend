@@ -17,7 +17,7 @@ namespace LivriaBackend.users.Interfaces.REST.Transform
                 entity.Display,
                 entity.Username,
                 entity.Email,
-                entity.Icon,
+                entity.Icon ?? string.Empty,
                 entity.Phrase,
                 entity.Subscription,
                 entity.PlanChangeDate,
