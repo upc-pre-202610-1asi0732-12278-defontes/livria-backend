@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using System.Threading.Tasks;
 using LivriaBackend.IAM.Domain.Model.Commands;

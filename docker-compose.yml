@@ -1,0 +1,22 @@
+# MySQL local para Livria (desarrollo). Uso:
+#   docker compose up -d
+# Contraseña de root: coincide con ConnectionStrings:DefaultConnection en user secrets.
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: livria-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: livria_local_root
+      MYSQL_DATABASE: livriadb
+    volumes:
+      - livria_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-plivria_local_root"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  livria_mysql_data:

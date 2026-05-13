@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using LivriaBackend.users.Domain.Model.Aggregates;
 using LivriaBackend.users.Domain.Model.Queries;

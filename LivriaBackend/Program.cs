@@ -137,8 +137,12 @@ var dbName = builder.Configuration.GetConnectionString("DbName");
 
 var finalConnectionString = $"{baseCredentials}database={dbName};";
 
-if (string.IsNullOrEmpty(finalConnectionString))
-    throw new InvalidOperationException("Database connection string 'DefaultConnection' not found.");
+if (string.IsNullOrWhiteSpace(baseCredentials))
+    throw new InvalidOperationException(
+        "ConnectionStrings:DefaultConnection is missing or empty. Configure user secrets or environment variables, e.g. dotnet user-secrets set \"ConnectionStrings:DefaultConnection\" \"Server=127.0.0.1;Port=3306;User ID=root;Password=...;\" --project LivriaBackend. For Azure Database for MySQL include SslMode=Required (see DEPLOY-AZURE.md in repo root).");
+
+if (string.IsNullOrWhiteSpace(dbName))
+    throw new InvalidOperationException("ConnectionStrings:DbName is missing or empty.");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySQL(finalConnectionString));
@@ -252,7 +256,12 @@ builder.Services.AddSwaggerGen(options =>
 });
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
-    serverOptions.ListenAnyIP(5119); // Esto hace que escuche en 192.168.1.42 y localhost
+    // En Azure App Service no fijar puerto: Linux usa PORT (p. ej. 8080); Windows usa IIS/ANCM.
+    // WEBSITE_INSTANCE_ID está definido en App Service (Windows y Linux).
+    if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("WEBSITE_INSTANCE_ID")))
+        return;
+
+    serverOptions.ListenAnyIP(5119); // Desarrollo local / mismo puerto que launchSettings
 });
 builder.Services.AddHostedService<SubscriptionExpirationService>();
 var app = builder.Build();

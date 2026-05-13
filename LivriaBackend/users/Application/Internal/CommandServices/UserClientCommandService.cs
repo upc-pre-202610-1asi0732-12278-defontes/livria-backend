@@ -1,4 +1,4 @@
-﻿using LivriaBackend.shared.Domain.Repositories;
+using LivriaBackend.shared.Domain.Repositories;
 using System;
 using System.Threading.Tasks;
 using LivriaBackend.commerce.Domain.Repositories; 
