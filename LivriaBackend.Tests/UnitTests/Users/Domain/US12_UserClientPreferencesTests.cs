@@ -10,7 +10,7 @@ using Xunit;
 
 namespace LivriaBackend.Tests.UnitTests.Users.Domain
 {
-    public class UserClientPreferencesTests
+    public class US12_UserClientPreferencesTests
     {
         // ------------------------------------------------------------------
         // Helpers

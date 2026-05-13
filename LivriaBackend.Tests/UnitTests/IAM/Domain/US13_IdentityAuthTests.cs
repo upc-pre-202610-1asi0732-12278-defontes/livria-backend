@@ -9,7 +9,7 @@ using Xunit;
 
 namespace LivriaBackend.Tests.UnitTests.IAM.Domain
 {
-    public class IdentityAuthTests
+    public class US13_IdentityAuthTests
     {
         // ------------------------------------------------------------------
         // Helper
