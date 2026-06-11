@@ -7924,11 +7924,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\luisa\\upc\\livria-backend\\LivriaBackend.Tests\\LivriaBackend.Tests.csproj",
+      "projectUniqueName": "c:\\Users\\luisa\\upc\\livria\\livria-backend\\LivriaBackend.Tests\\LivriaBackend.Tests.csproj",
       "projectName": "LivriaBackend.Tests",
-      "projectPath": "C:\\Users\\luisa\\upc\\livria-backend\\LivriaBackend.Tests\\LivriaBackend.Tests.csproj",
+      "projectPath": "c:\\Users\\luisa\\upc\\livria\\livria-backend\\LivriaBackend.Tests\\LivriaBackend.Tests.csproj",
       "packagesPath": "C:\\Users\\luisa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\luisa\\upc\\livria-backend\\LivriaBackend.Tests\\obj\\",
+      "outputPath": "c:\\Users\\luisa\\upc\\livria\\livria-backend\\LivriaBackend.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -7950,8 +7950,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\luisa\\upc\\livria-backend\\LivriaBackend\\LivriaBackend.csproj": {
-              "projectPath": "C:\\Users\\luisa\\upc\\livria-backend\\LivriaBackend\\LivriaBackend.csproj"
+            "c:\\Users\\luisa\\upc\\livria\\livria-backend\\LivriaBackend\\LivriaBackend.csproj": {
+              "projectPath": "c:\\Users\\luisa\\upc\\livria\\livria-backend\\LivriaBackend\\LivriaBackend.csproj"
             }
           }
         }
